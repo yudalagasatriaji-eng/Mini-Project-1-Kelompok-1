@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Balita Stunting DKI Jakarta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-heart-pulse-fill me-2"></i>Satu Data Jakarta - Kesehatan Masyarakat
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Header Title -->
+        <div class="mb-4">
+            <h2 class="fw-bold text-dark">Data Balita Pendek (Stunting) Per Kelurahan</h2>
+            <p class="text-muted mb-0">Portal Informasi dan Distribusi Kasus Stunting Balita Provinsi DKI Jakarta</p>
+        </div>
+
+        <!-- Ringkasan Statistik -->
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card border-0 shadow-sm p-3 border-start border-4 border-secondary">
+                    <span class="text-muted small">Total Wilayah / Kelurahan</span>
+                    <h3 class="fw-bold text-dark mb-0">267</h3>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card border-0 shadow-sm p-3 border-start border-4 border-danger">
+                    <span class="text-muted small">Total Kasus Stunting</span>
+                    <h4 class="fw-bold text-danger mb-0">7,673 Balita</h4>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card border-0 shadow-sm p-3 border-start border-4 border-warning">
+                    <span class="text-muted small">Rata-Rata Kasus / Kelurahan</span>
+                    <h4 class="fw-bold text-primary mb-0">29 Balita</h4>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="card border-0 shadow-sm p-3 border-start border-4 border-info">
+                    <span class="text-muted small">Kasus Tertinggi</span>
+                    <h4 class="fw-bold text-dark mb-0">811 Balita</h4>
+                    <span class="badge bg-danger text-white mt-1 text-truncate" title="KAB. ADM. KEP. SERIBU">
+                        <i class="bi bi-geo-alt-fill me-1"></i>KAB. ADM. KEP. SERIBU
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Diagram -->
+        <div class="row g-4 mb-4">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-bar-chart-line-fill me-2"></i>Distribusi Kasus per Wilayah</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height:320px;">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-pie-chart-fill me-2"></i>Proporsi Kasus</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="position: relative; height:320px;">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Tabel -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-table me-2"></i>Data Detail Stunting Per Kelurahan</h5>
+                <span class="badge bg-danger">267 Record</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>PERIODE DATA</th>
+                                <th>WILAYAH</th>
+                                <th>KELURAHAN</th>
+                                <th>JUMLAH BALITA PENDEK</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>MERUYA UTARA</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>SRENGSENG</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JATIPULO</td>
+                                <td>48</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEMANGGISAN</td>
+                                <td>92</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KOTA BAMBU SELATAN</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>PALMERAH</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KOTA BAMBU UTARA</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>SLIPI</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>GLODOK</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEAGUNGAN</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KRUKUT</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>MANGGA BESAR</td>
+                                <td>29</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>MAPHAR</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>PINANGSIA</td>
+                                <td>48</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TAMAN SARI</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TANGKI</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>DURI KEPA</td>
+                                <td>35</td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEBON JERUK</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEDOYA SELATAN</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEDOYA UTARA</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KELAPA DUA</td>
+                                <td>125</td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>SUKABUMI SELATAN</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>SUKABUMI UTARA</td>
+                                <td>29</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>ANGKE</td>
+                                <td>41</td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>DURI UTARA</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KALI ANYAR</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>27</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JEMBATAN BESI</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KRENDANG</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>29</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>PEKOJAN</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TAMBORA</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TANAH SEREAL</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CILANDAK BARAT</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>33</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIPETE SELATAN</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GANDARIA SELATAN</td>
+                                <td>56</td>
+                            </tr>
+                            <tr>
+                                <td>35</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>LEBAK BULUS</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>36</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PONDOK LABU</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>37</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIGANJUR</td>
+                                <td>55</td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIPEDAK</td>
+                                <td>47</td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>JAGAKARSA</td>
+                                <td>71</td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>LENTENG AGUNG</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>41</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>SRENGSENG SAWAH</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>TANJUNG BARAT</td>
+                                <td>68</td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIPETE UTARA</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>44</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GANDARIA UTARA</td>
+                                <td>27</td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GUNUNG</td>
+                                <td>33</td>
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KRAMAT PELA</td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <td>47</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MELAWAI</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>48</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PETOGOGAN</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>49</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PULO</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>50</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>RAWA BARAT</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>51</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>SELONG</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>52</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>SENAYAN</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>53</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIPULIR</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>54</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GROGOL SELATAN</td>
+                                <td>88</td>
+                            </tr>
+                            <tr>
+                                <td>55</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GROGOL UTARA</td>
+                                <td>27</td>
+                            </tr>
+                            <tr>
+                                <td>56</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KEBAYORAN LAMA SELATAN</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>57</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KEBAYORAN LAMA UTARA</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>58</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PONDOK PINANG</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>59</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>BANGKA</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>60</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KUNINGAN BARAT</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>61</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MAMPANG PRAPATAN</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>62</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PELA MAMPANG</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>63</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>TEGAL PARANG</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>64</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CIKOKO</td>
+                                <td>37</td>
+                            </tr>
+                            <tr>
+                                <td>65</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BARU</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>66</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIJANTUNG</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>67</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>GEDONG</td>
+                                <td>59</td>
+                            </tr>
+                            <tr>
+                                <td>68</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KALISARI</td>
+                                <td>43</td>
+                            </tr>
+                            <tr>
+                                <td>69</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PEKAYON</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>70</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>DURI SELATAN</td>
+                                <td>85</td>
+                            </tr>
+                            <tr>
+                                <td>71</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JEMBATAN LIMA</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>72</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>ROA MALAKA</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>73</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>CIKINI</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>74</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PULO GADUNG</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>75</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>DUREN TIGA</td>
+                                <td>82</td>
+                            </tr>
+                            <tr>
+                                <td>76</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KALIBATA</td>
+                                <td>98</td>
+                            </tr>
+                            <tr>
+                                <td>77</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PANCORAN</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>78</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PENGADEGAN</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>79</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>RAWAJATI</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>80</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KEBON BARU</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>81</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MANGGARAI</td>
+                                <td>36</td>
+                            </tr>
+                            <tr>
+                                <td>82</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MANGGARAI SELATAN</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>83</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MENTENG DALAM</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>84</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>TEBET BARAT</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>85</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>TEBET TIMUR</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>86</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>CILINCING</td>
+                                <td>32</td>
+                            </tr>
+                            <tr>
+                                <td>87</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KALIBARU</td>
+                                <td>93</td>
+                            </tr>
+                            <tr>
+                                <td>88</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>MARUNDA</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>89</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>ROROTAN</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>90</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SEMPER BARAT</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>91</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SEMPER TIMUR</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>92</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SUKAPURA</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>93</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KELAPA GADING BARAT</td>
+                                <td>80</td>
+                            </tr>
+                            <tr>
+                                <td>94</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KELAPA GADING TIMUR</td>
+                                <td>258</td>
+                            </tr>
+                            <tr>
+                                <td>95</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PEGANGSAAN DUA</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>96</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KOJA</td>
+                                <td>56</td>
+                            </tr>
+                            <tr>
+                                <td>97</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>LAGOA</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>98</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>RAWA BADAK SELATAN</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>99</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>RAWA BADAK UTARA</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>TUGU SELATAN</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>101</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>TUGU UTARA</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>ANCOL</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>103</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PADEMANGAN BARAT</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>104</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PADEMANGAN TIMUR</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>105</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KAMAL MUARA</td>
+                                <td>48</td>
+                            </tr>
+                            <tr>
+                                <td>106</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PEJAGALAN</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>107</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KAPUK MUARA</td>
+                                <td>46</td>
+                            </tr>
+                            <tr>
+                                <td>108</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PENJARINGAN</td>
+                                <td>83</td>
+                            </tr>
+                            <tr>
+                                <td>109</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PLUIT</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>110</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>KEBON BAWANG</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>111</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>PAPANGGO</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>112</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SUNGAI BAMBU</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>113</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SUNTER AGUNG</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>114</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>TANJUNG PRIOK</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>115</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>SUNTER JAYA</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>116</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA UTARA</td>
+                                <td>WARAKAS</td>
+                                <td>95</td>
+                            </tr>
+                            <tr>
+                                <td>117</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU PARI</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>118</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU TIDUNG</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>119</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU UNTUNG JAWA</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>120</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU HARAPAN</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>121</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU KELAPA</td>
+                                <td>811</td>
+                            </tr>
+                            <tr>
+                                <td>122</td>
+                                <td>2024</td>
+                                <td>KAB. ADM. KEP. SERIBU</td>
+                                <td>PULAU PANGGANG</td>
+                                <td>51</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CAKUNG BARAT</td>
+                                <td>39</td>
+                            </tr>
+                            <tr>
+                                <td>124</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CAKUNG TIMUR</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>125</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>CILANDAK TIMUR</td>
+                                <td>48</td>
+                            </tr>
+                            <tr>
+                                <td>126</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>JATI PADANG</td>
+                                <td>70</td>
+                            </tr>
+                            <tr>
+                                <td>127</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KEBAGUSAN</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>128</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PASAR MINGGU</td>
+                                <td>98</td>
+                            </tr>
+                            <tr>
+                                <td>129</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PEJATEN BARAT</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>130</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PEJATEN TIMUR</td>
+                                <td>80</td>
+                            </tr>
+                            <tr>
+                                <td>131</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>RAGUNAN</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>132</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>BINTARO</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>133</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PESANGGRAHAN</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>134</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PETUKANGAN SELATAN</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>135</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PETUKANGAN UTARA</td>
+                                <td>180</td>
+                            </tr>
+                            <tr>
+                                <td>136</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>ULUJAMI</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>137</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>GUNTUR</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>138</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KARET</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>139</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KARET KUNINGAN</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>140</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KARET SEMANGGI</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>141</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>KUNINGAN TIMUR</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>142</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>MENTENG ATAS</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>143</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>PASAR MANGGIS</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>144</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>SETIA BUDI</td>
+                                <td>108</td>
+                            </tr>
+                            <tr>
+                                <td>145</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA SELATAN</td>
+                                <td>BUKIT DURI</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>146</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>JATINEGARA</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>147</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PENGGILINGAN</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>148</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PULO GEBANG</td>
+                                <td>82</td>
+                            </tr>
+                            <tr>
+                                <td>149</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>RAWA TERATE</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>150</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>UJUNG MENTENG</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>151</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BAMBU APUS</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>152</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CEGER</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>153</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CILANGKAP</td>
+                                <td>36</td>
+                            </tr>
+                            <tr>
+                                <td>154</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPAYUNG</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>155</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>LUBANG BUAYA</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>156</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>MUNJUL</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>157</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PONDOK RANGGON</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>158</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>SETU</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>159</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIBUBUR</td>
+                                <td>54</td>
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIRACAS</td>
+                                <td>27</td>
+                            </tr>
+                            <tr>
+                                <td>161</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>RAMBUTAN</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>162</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KELAPA DUA WETAN</td>
+                                <td>65</td>
+                            </tr>
+                            <tr>
+                                <td>163</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>SUSUKAN</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>164</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>DUREN SAWIT</td>
+                                <td>46</td>
+                            </tr>
+                            <tr>
+                                <td>165</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KLENDER</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>166</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>MALAKA JAYA</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>167</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>MALAKA SARI</td>
+                                <td>29</td>
+                            </tr>
+                            <tr>
+                                <td>168</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PONDOK BAMBU</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>169</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PONDOK KELAPA</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>170</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PONDOK KOPI</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>171</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BALI MESTER</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>172</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BIDARA CINA</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>173</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG BESAR SELATAN</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>174</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG BESAR UTARA</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>175</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG CEMPEDAK</td>
+                                <td>24</td>
+                            </tr>
+                            <tr>
+                                <td>176</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG MUARA</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>177</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KAMPUNG MELAYU</td>
+                                <td>44</td>
+                            </tr>
+                            <tr>
+                                <td>178</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>RAWA BUNGA</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>179</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BALEKAMBANG</td>
+                                <td>37</td>
+                            </tr>
+                            <tr>
+                                <td>180</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>BATU AMPAR</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>181</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CAWANG</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>182</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CILILITAN</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>DUKUH</td>
+                                <td>32</td>
+                            </tr>
+                            <tr>
+                                <td>184</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>TENGAH</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KRAMATJATI</td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <td>186</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG MELAYU</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>187</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>HALIM PERDANA KUSUMA</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>188</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KEBON PALA</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>189</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>MAKASAR</td>
+                                <td>115</td>
+                            </tr>
+                            <tr>
+                                <td>190</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PINANGRANTI</td>
+                                <td>35</td>
+                            </tr>
+                            <tr>
+                                <td>191</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KAYU MANIS</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>192</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KEBON MANGGIS</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>193</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PALMERIAM</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>194</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PISANGAN BARU</td>
+                                <td>45</td>
+                            </tr>
+                            <tr>
+                                <td>195</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>UTAN KAYU SELATAN</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>196</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>UTAN KAYU UTARA</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>197</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>CIPINANG</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>198</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>JATI</td>
+                                <td>72</td>
+                            </tr>
+                            <tr>
+                                <td>199</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>JATINEGARA KAUM</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>200</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>KAYU PUTIH</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>201</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>PISANGAN TIMUR</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>202</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA TIMUR</td>
+                                <td>RAWAMANGUN</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>203</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>CEMPAKA PUTIH BARAT</td>
+                                <td>37</td>
+                            </tr>
+                            <tr>
+                                <td>204</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>CEMPAKA PUTIH TIMUR</td>
+                                <td>30</td>
+                            </tr>
+                            <tr>
+                                <td>205</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>RAWASARI</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>206</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>CIDENG</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>207</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>DURI PULO</td>
+                                <td>60</td>
+                            </tr>
+                            <tr>
+                                <td>208</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GAMBIR</td>
+                                <td>44</td>
+                            </tr>
+                            <tr>
+                                <td>209</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEBON KELAPA</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>210</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PETOJO SELATAN</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>211</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PETOJO UTARA</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>212</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GALUR</td>
+                                <td>34</td>
+                            </tr>
+                            <tr>
+                                <td>213</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>JOHAR BARU</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>214</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KAMPUNG RAWA</td>
+                                <td>39</td>
+                            </tr>
+                            <tr>
+                                <td>215</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>TANAH TINGGI</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>216</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>CEMPAKA BARU</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>217</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GUNUNG SAHARI SELATAN</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>218</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>HARAPAN MULIA</td>
+                                <td>44</td>
+                            </tr>
+                            <tr>
+                                <td>219</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEMAYORAN</td>
+                                <td>130</td>
+                            </tr>
+                            <tr>
+                                <td>220</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEBON KOSONG</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>221</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>SERDANG</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>222</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>SUMUR BATU</td>
+                                <td>58</td>
+                            </tr>
+                            <tr>
+                                <td>223</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>UTAN PANJANG</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>224</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GONDANGDIA</td>
+                                <td>30</td>
+                            </tr>
+                            <tr>
+                                <td>225</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEBON SIRIH</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>226</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>MENTENG</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>227</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PEGANGSAAN</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>228</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GUNUNG SAHARI UTARA</td>
+                                <td>14</td>
+                            </tr>
+                            <tr>
+                                <td>229</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KARANG ANYAR</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>230</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KARTINI</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>231</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>MANGGA DUA SELATAN</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>232</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PASAR BARU</td>
+                                <td>33</td>
+                            </tr>
+                            <tr>
+                                <td>233</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>BUNGUR</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>234</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KENARI</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>235</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KRAMAT</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>236</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KWITANG</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>237</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PASEBAN</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>238</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>SENEN</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>239</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>BENDUNGAN HILIR</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>240</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>GELORA</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>241</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KAMPUNG BALI</td>
+                                <td>45</td>
+                            </tr>
+                            <tr>
+                                <td>242</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KARET TENGSIN</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>243</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEBON KACANG</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>244</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>KEBON MELATI</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>245</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA PUSAT</td>
+                                <td>PETAMBURAN</td>
+                                <td>24</td>
+                            </tr>
+                            <tr>
+                                <td>246</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>CENGKARENG BARAT</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>247</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>CENGKARENG TIMUR</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>248</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>DURI KOSAMBI</td>
+                                <td>50</td>
+                            </tr>
+                            <tr>
+                                <td>249</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KAPUK</td>
+                                <td>30</td>
+                            </tr>
+                            <tr>
+                                <td>250</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEDAUNG KALI ANGKE</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>251</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>RAWA BUAYA</td>
+                                <td>97</td>
+                            </tr>
+                            <tr>
+                                <td>252</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>GROGOL</td>
+                                <td>70</td>
+                            </tr>
+                            <tr>
+                                <td>253</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JELAMBAR</td>
+                                <td>43</td>
+                            </tr>
+                            <tr>
+                                <td>254</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JELAMBAR BARU</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>255</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TANJUNG DUREN SELATAN</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>256</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TOMANG</td>
+                                <td>58</td>
+                            </tr>
+                            <tr>
+                                <td>257</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>WIJAYA KUSUMA</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <td>258</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TANJUNG DUREN UTARA</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>259</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KALIDERES</td>
+                                <td>33</td>
+                            </tr>
+                            <tr>
+                                <td>260</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KAMAL</td>
+                                <td>37</td>
+                            </tr>
+                            <tr>
+                                <td>261</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>PEGADUNGAN</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>262</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>SEMANAN</td>
+                                <td>39</td>
+                            </tr>
+                            <tr>
+                                <td>263</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>TEGAL ALUR</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>264</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>JOGLO</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>265</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEMBANGAN SELATAN</td>
+                                <td>35</td>
+                            </tr>
+                            <tr>
+                                <td>266</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>KEMBANGAN UTARA</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>267</td>
+                                <td>2024</td>
+                                <td>KOTA ADM. JAKARTA BARAT</td>
+                                <td>MERUYA SELATAN</td>
+                                <td>95</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white text-muted text-center py-3">
+                <small>Sumber Data: API Resmi <a href="https://satudata.jakarta.go.id" target="_blank" class="text-decoration-none">satudata.jakarta.go.id</a></small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const labels = ["KOTA ADM. JAKARTA SELATAN", "KOTA ADM. JAKARTA TIMUR", "KOTA ADM. JAKARTA BARAT", "KOTA ADM. JAKARTA UTARA", "KOTA ADM. JAKARTA PUSAT", "KAB. ADM. KEP. SERIBU"];
+            const dataValues = [1801, 1567, 1487, 977, 952, 889];
+
+            // 1. Diagram Batang
+            const ctxBar = document.getElementById('barChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Balita Stunting',
+                        data: dataValues,
+                        backgroundColor: 'rgba(220, 53, 69, 0.75)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let value = context.raw || 0;
+                                    return 'Jumlah: ' + value.toLocaleString('id-ID') + ' Balita';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString('id-ID');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Diagram Lingkaran
+            const ctxPie = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataValues,
+                        backgroundColor: [
+                            '#dc3545', '#0d6efd', '#ffc107', '#0dcaf0', '#6c757d', '#d63384', '#fd7e14', '#20c997', '#6f42c1', '#198754'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    return label + ': ' + value.toLocaleString('id-ID') + ' Balita';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+</body>
+</html>
