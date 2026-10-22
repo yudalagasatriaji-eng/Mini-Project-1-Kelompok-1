@@ -143,53 +143,125 @@ def main():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Balita Stunting DKI Jakarta</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {{
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6 !important;
+        }}
+        .navbar {{
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }}
+        .card {{
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        .card:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }}
+        .icon-box {{
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+        }}
+        .table-responsive {{
+            border-radius: 12px;
+            overflow: hidden;
+        }}
+        table.dataTable thead th {{
+            background-color: #212529;
+            color: white;
+            border-bottom: none;
+        }}
+    </style>
 </head>
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">
-                <i class="bi bi-heart-pulse-fill me-2"></i>Satu Data Jakarta - Kesehatan Masyarakat
+                <i class="bi bi-heart-pulse-fill me-2 text-white"></i>Satu Data Jakarta
             </a>
+            <span class="navbar-text text-white-50 small">
+                Portal Kesehatan Masyarakat
+            </span>
         </div>
     </nav>
 
-    <div class="container my-4">
+    <div class="container my-5">
         <!-- Header Title -->
-        <div class="mb-4">
-            <h2 class="fw-bold text-dark">Data Balita Pendek (Stunting) Per Kelurahan</h2>
-            <p class="text-muted mb-0">Portal Informasi dan Distribusi Kasus Stunting Balita Provinsi DKI Jakarta</p>
+        <div class="mb-5 text-center">
+            <h2 class="fw-bold text-dark mb-2">Data Balita Pendek (Stunting) Per Kelurahan</h2>
+            <p class="text-muted">Distribusi Kasus Stunting Balita Provinsi DKI Jakarta berdasarkan data terkini</p>
         </div>
 
         <!-- Ringkasan Statistik -->
-        <div class="row g-3 mb-4">
+        <div class="row g-4 mb-5">
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-3 border-start border-4 border-secondary">
-                    <span class="text-muted small">Total Wilayah / Kelurahan</span>
-                    <h3 class="fw-bold text-dark mb-0">{len(df):,}</h3>
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Total Wilayah</span>
+                            <h3 class="fw-bold text-dark mb-0 mt-2">{len(df):,}</h3>
+                        </div>
+                        <div class="icon-box bg-secondary bg-opacity-10 text-secondary">
+                            <i class="bi bi-map-fill"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-3 border-start border-4 border-danger">
-                    <span class="text-muted small">Total Kasus Stunting</span>
-                    <h4 class="fw-bold text-danger mb-0">{df[val_col].sum():,.0f} Balita</h4>
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Total Kasus</span>
+                            <h4 class="fw-bold text-danger mb-0 mt-2">{df[val_col].sum():,.0f}</h4>
+                        </div>
+                        <div class="icon-box bg-danger bg-opacity-10 text-danger">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-3 border-start border-4 border-warning">
-                    <span class="text-muted small">Rata-Rata Kasus / Kelurahan</span>
-                    <h4 class="fw-bold text-primary mb-0">{df[val_col].mean():,.1f} Balita</h4>
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Rata-Rata</span>
+                            <h4 class="fw-bold text-primary mb-0">{df[val_col].mean():,.0f} Balita</h4>
+                        </div>
+                        <div class="icon-box bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-3 border-start border-4 border-info">
-                    <span class="text-muted small">Kasus Tertinggi</span>
-                    <h4 class="fw-bold text-dark mb-0">{nilai_tertinggi:,.0f} Balita</h4>
-                    <span class="badge bg-danger text-white mt-1 text-truncate" title="{detail_ket}">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Tertinggi</span>
+                            <h4 class="fw-bold text-dark mb-0 mt-2">{nilai_tertinggi:,.0f}</h4>
+                        </div>
+                        <div class="icon-box bg-warning bg-opacity-10 text-warning">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </div>
+                    </div>
+                    <span class="badge bg-danger text-white mt-3 text-truncate w-100 py-2" title="{detail_ket}">
                         <i class="bi bi-geo-alt-fill me-1"></i>{detail_ket}
                     </span>
                 </div>
@@ -197,14 +269,14 @@ def main():
         </div>
 
         <!-- Section Diagram -->
-        <div class="row g-4 mb-4">
+        <div class="row g-4 mb-5">
             <div class="col-12 col-lg-8">
                 <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-bar-chart-line-fill me-2"></i>Distribusi Kasus per {label_kategori}</h5>
+                    <div class="card-header bg-white py-3 border-0">
+                        <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bar-chart-line-fill me-2 text-danger"></i>Distribusi 10 Tertinggi per {label_kategori}</h6>
                     </div>
                     <div class="card-body">
-                        <div style="position: relative; height:320px;">
+                        <div style="position: relative; height:350px;">
                             <canvas id="barChart"></canvas>
                         </div>
                     </div>
@@ -212,11 +284,11 @@ def main():
             </div>
             <div class="col-12 col-lg-4">
                 <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-pie-chart-fill me-2"></i>Proporsi Kasus</h5>
+                    <div class="card-header bg-white py-3 border-0">
+                        <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-pie-chart-fill me-2 text-danger"></i>Proporsi Kasus</h6>
                     </div>
-                    <div class="card-body">
-                        <div style="position: relative; height:320px;">
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        <div style="position: relative; height:300px; width:100%;">
                             <canvas id="pieChart"></canvas>
                         </div>
                     </div>
@@ -226,16 +298,16 @@ def main():
 
         <!-- Section Tabel -->
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold mb-0 text-danger"><i class="bi bi-table me-2"></i>Data Detail Stunting Per Kelurahan</h5>
-                <span class="badge bg-danger">{len(df):,} Record</span>
+            <div class="card-header bg-white py-4 d-flex justify-content-between align-items-center border-0">
+                <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-table me-2 text-danger"></i>Data Detail Stunting Per Kelurahan</h6>
+                <span class="badge bg-danger rounded-pill px-3 py-2">{len(df):,} Record</span>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-4 pt-0">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle mb-0">
+                    <table id="dataTable" class="table table-hover align-middle mb-0 w-100">
                         <thead class="table-dark">
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
 """
 
     # Generasi Header Tabel Tanpa Underscore (_)
@@ -251,7 +323,7 @@ def main():
 
     # Generasi Isi Baris Tabel
     for idx, row in df.iterrows():
-        html_table += f"                            <tr>\n                                <td>{idx + 1}</td>\n"
+        html_table += f"                            <tr>\n                                <td class='text-center'>{idx + 1}</td>\n"
         for col in df.columns:
             val = row[col]
 
@@ -271,17 +343,36 @@ def main():
                     </table>
                 </div>
             </div>
-            <div class="card-footer bg-white text-muted text-center py-3">
-                <small>Sumber Data: API Resmi <a href="https://satudata.jakarta.go.id" target="_blank" class="text-decoration-none">satudata.jakarta.go.id</a></small>
+            <div class="card-footer bg-white text-muted text-center py-3 border-0">
+                <small>Sumber Data: API Resmi <a href="https://satudata.jakarta.go.id" target="_blank" class="text-decoration-none text-danger">satudata.jakarta.go.id</a></small>
             </div>
         </div>
     </div>
 """
 
-    # Config Chart.js
+    # Config Chart.js & DataTables
     js_script = f"""
+    <!-- jQuery dan DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
+        // Setup Global Font untuk Chart.js
+        Chart.defaults.font.family = "'Poppins', sans-serif";
+        Chart.defaults.color = "#6c757d";
+
         document.addEventListener("DOMContentLoaded", function() {{
+            // Inisialisasi DataTables
+            $('#dataTable').DataTable({{
+                language: {{
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json',
+                }},
+                pageLength: 10,
+                ordering: true
+            }});
+
             const labels = {chart_labels};
             const dataValues = {chart_data};
 
@@ -294,10 +385,11 @@ def main():
                     datasets: [{{
                         label: 'Jumlah Balita Stunting',
                         data: dataValues,
-                        backgroundColor: 'rgba(220, 53, 69, 0.75)',
+                        backgroundColor: 'rgba(220, 53, 69, 0.85)',
                         borderColor: 'rgba(220, 53, 69, 1)',
-                        borderWidth: 1.5,
-                        borderRadius: 6
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        barPercentage: 0.6
                     }}]
                 }},
                 options: {{
@@ -306,10 +398,11 @@ def main():
                     plugins: {{
                         legend: {{ display: false }},
                         tooltip: {{
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            padding: 12,
                             callbacks: {{
                                 label: function(context) {{
-                                    let value = context.raw || 0;
-                                    return 'Jumlah: ' + value.toLocaleString('id-ID') + ' Balita';
+                                    return 'Jumlah: ' + context.raw.toLocaleString('id-ID') + ' Balita';
                                 }}
                             }}
                         }}
@@ -317,11 +410,13 @@ def main():
                     scales: {{
                         y: {{
                             beginAtZero: true,
+                            grid: {{ borderDash: [4, 4] }},
                             ticks: {{
-                                callback: function(value) {{
-                                    return value.toLocaleString('id-ID');
-                                }}
+                                callback: function(value) {{ return value.toLocaleString('id-ID'); }}
                             }}
+                        }},
+                        x: {{
+                            grid: {{ display: false }}
                         }}
                     }}
                 }}
@@ -336,20 +431,25 @@ def main():
                     datasets: [{{
                         data: dataValues,
                         backgroundColor: [
-                            '#dc3545', '#0d6efd', '#ffc107', '#0dcaf0', '#6c757d', '#d63384', '#fd7e14', '#20c997', '#6f42c1', '#198754'
-                        ]
+                            '#dc3545', '#0d6efd', '#ffc107', '#0dcaf0', '#6c757d', 
+                            '#d63384', '#fd7e14', '#20c997', '#6f42c1', '#198754'
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 5
                     }}]
                 }},
                 options: {{
                     responsive: true,
                     maintainAspectRatio: false,
+                    cutout: '65%',
                     plugins: {{
+                        legend: {{ position: 'bottom', labels: {{ padding: 20 }} }},
                         tooltip: {{
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            padding: 12,
                             callbacks: {{
                                 label: function(context) {{
-                                    let label = context.label || '';
-                                    let value = context.raw || 0;
-                                    return label + ': ' + value.toLocaleString('id-ID') + ' Balita';
+                                    return ' ' + context.label + ': ' + context.raw.toLocaleString('id-ID') + ' Balita';
                                 }}
                             }}
                         }}
@@ -358,8 +458,6 @@ def main():
             }});
         }});
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 """
@@ -370,7 +468,7 @@ def main():
         f.write(full_html)
 
     print(
-        "4. Selesai! File 'index.html' berhasil diperbarui dengan dataset Stunting Balita."
+        "4. Selesai! File 'index.html' berhasil diperbarui dengan dataset Stunting Balita (Dashboard Baru)."
     )
 
 
